@@ -17,7 +17,7 @@ def load_filtered_data(file_name, topics):
 
 def generate_question(context, existing_questions):
     while True:
-        prompt = f"Generate a multiple-choice question with 3 options considering all the topics from the context, the correct answer, and justification based on the following context:\n{context}"
+        prompt = f"Generate a unique multiple-choice question with 3 options and remember it considering all the topics from the context, the correct answer, and justification based on the following context:\n{context}\nEnsure that each generated question is distinct from the previous ones and that the questions are unique"
         response = openai.Completion.create(
             model="gpt-3.5-turbo-instruct",  # Adjust according to the model you're using
             prompt=prompt,
