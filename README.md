@@ -5,6 +5,7 @@
 Development of a Structured Database and Text Extraction System for Finance Professional Development Resources
 
 ## Project Goals
+Utilize Pinecone and OpenAI APIs to create knowledge summaries, generate a contextual knowledge base, utilize vector databases for question answering, and employ GPT-based summaries to provide accurate answers.
 
 ## Project Tasks
     
@@ -62,8 +63,11 @@ By completing these tasks, we aim to evaluate different approaches for knowledge
 [![Google Cloud Platform](https://img.shields.io/badge/Google%20Cloud%20Platform-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://www.streamlit.io/)
 [![Pinecone](https://img.shields.io/badge/Pinecone-7B0099?style=for-the-badge&logo=pinecone&logoColor=white)](https://www.pinecone.io/)
+[![OpenAI](https://img.shields.io/badge/OpenAI-000000?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
+
 
 ## Project URLs
+
 
 ## Project Structure
 
@@ -72,6 +76,8 @@ By completing these tasks, we aim to evaluate different approaches for knowledge
 
 
 ## To run the application locally, follow these steps:
+
+
 
 ## Team Information and Contribution 
 
