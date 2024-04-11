@@ -114,6 +114,12 @@ def main():
                 with open(md_file_path, 'r') as md_file:
                     md_content = md_file.read()
                     st.markdown(md_content)
+                try:
+                    pinecone_upload.main()
+                    st.write("Data saved in Pinecone")
+                except Exception as e:
+                    st.error(f"Error uploading data to Pinecone: {str(e)}")
+
 
    
     
