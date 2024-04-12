@@ -43,7 +43,9 @@ By completing these tasks, we aim to evaluate different approaches for knowledge
 
 [![codelabs](https://codelabs-preview.appspot.com/?file_id=1fgubqz6h9BDCbEH1wdWYCjpfK3Iof7RCu2W_Kd6uOAY#3)
 
-[Demo]()
+[!Demo Part1](https://www.youtube.com/watch?v=5RZNkLJtoBE)
+ 
+[!Demo Part2](https://www.youtube.com/watch?v=0n0S1EA3dPc)
 
 ## Technologies Used
 
