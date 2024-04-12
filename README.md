@@ -8,43 +8,32 @@ Development of a Structured Database and Text Extraction System for Finance Prof
 Utilize Pinecone and OpenAI APIs to create knowledge summaries, generate a contextual knowledge base, utilize vector databases for question answering, and employ GPT-based summaries to provide accurate answers.
 
 ## Project Tasks
+  
+### Step1 Generating Technical Notes from LOS:
+        
+    1. The script Step1_Summary_LOS.py utilizes OpenAI's GPT to generate technical notes summarizing key Learning Outcome Statements (LOS).
+    2. Furthermore, the script integrates with Pinecone for efficient data storage by chunking each LOS and its corresponding technical note and uploading it to Pinecone for retrieval.
+
+ ### Step 2: Question Bank Creation and Data Organization
+
+    1. Question Bank Creation: Generate question banks for each assigned topic. Save these questions as separate TXT files for each topic.
+    2. Parsing TXT Files to Generate JSON Schema: Develop a parser to extract questions from TXT files. Create a JSON schema for all questions within each set (Set A and Set B). Include metadata such as the topic to identify the source of the questions.
+    3. Data Organization and Storage: Save parsed data in JSON format. Utilize Pinecone for data storage with topics as namespaces.
+
+
+### Step 3: Using a Vector Database to Find and Answer Questions
     
-    ### Task 1: Creating Knowledge Summaries using OpenAI’s GPT
+    1. Utilizing RAG for Question Similarity Search: The system employs RAG (Retrieval-Augmented Generation) to search for similar questions based on information stored in Pinecone. It retrieves relevant question-answer pairs from Set A to assess the accuracy of answers from Set B.
+    2. GPT-4 Question Answering Process: Question-answer pairs from Set A are passed to GPT-4 along with a question from Set B and answer choices. GPT-4 processes the input and generates responses, simulating human-like comprehension and reasoning.
+    3. Evaluation of Answer Correctness: The system evaluates the correctness of answers provided by GPT-4 and compares them to the actual answers. Results are presented to the user, allowing for further analysis and refinement of the question answering process.
+
     
-    **Goal:** To build a knowledge base from topic summaries and Learning Outcome Statements (LOS).  
-    **Target User:** Financial analysts with an MBA seeking to understand LOS.  
+### Step 4: Use Knowledge Summaries to Answer Questions
     
-    1. Generate technical notes summarizing key Learning Outcome Statements (LOS) using the provided context (summary, introduction, and LOS).
-    2. Compile the notes into a markdown document.
-    3. Chunk each LOS and its corresponding note and store it in Pinecone for efficient retrieval.
-    
-    ### Task 2: Generating a Knowledge Base (Q/A) providing context
-    
-    **Goal:** To develop a question/answer set for reinforcing learning from topic summaries.  
-    **Target User:** Financial analysts with an MBA interested in LOS.  
-    
-    1. Create a question bank of 50 questions (Set A) with four options and one correct answer from the "Summary" section of each assigned topic.
-    2. Parse sample documents for context and generate questions of similar complexity and type.
-    3. Generate another set of 50 questions and answers (Set B) for comparison.
-    4. Store Set A questions and answers separately in Pinecone.
-    
-    ### Task 3: Using a Vector Database to Find and Answer Questions
-    
-    **Goal:** To utilize a vector database to answer questions accurately.  
-    **Target User:** Financial analysts with an MBA seeking efficient question answering.  
-    
-    1. Use RAG to search for similar questions and determine the accuracy of answers from Set B using information from Set A stored in Pinecone.
-    2. Pass question-answer pairs from Set A to GPT-4 along with a question from Set B and answer choices.
-    3. Evaluate the correctness of answers provided by GPT-4 and compare them to the actual answers.
-    
-    ### Task 4: Use Knowledge Summaries to Answer Questions
-    
-    **Goal:** To leverage knowledge summaries to answer questions effectively.  
-    **Target User:** Financial analysts with an MBA aiming for accurate question answering.  
-    
-    1. Utilize RAG in the Pinecone vector database to find similar embeddings and LOS containing answers to questions from Set A and Set B.
-    2. Tabulate the accuracy of answers to the 100 questions/topics.
-    3. Discuss the effectiveness of this approach compared to Task 3 and propose alternative designs for improved question answering. 
+    1. Utilizing RAG in Pinecone Vector Database: The system employs RAG (Retrieval-Augmented Generation) within the Pinecone vector database to search for similar embeddings and Learning Outcome Statements (LOS) containing answers to questions from both Set A and Set B.
+    2. Tabulating Answer Accuracy: The accuracy of answers to the 100 questions/topics is tabulated and presented to the user.
+    3. Evaluation and Discussion: The effectiveness of this approach is discussed in comparison to Task 3, highlighting its strengths and areas for improvement.
+    Alternative designs for enhanced question answering are proposed, considering factors such as accuracy, efficiency, and user experience.
 
 ## Conclusion
 
@@ -66,16 +55,110 @@ By completing these tasks, we aim to evaluate different approaches for knowledge
 [![OpenAI](https://img.shields.io/badge/OpenAI-000000?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
 
 
-## Project URLs
-
 
 ## Project Structure
-
-
+```
+├── .gitignore
+├── docker-compose.yml
+├── Makefile
+├── README.md
+├── requirements.txt
+├── backend
+│   ├── Dockerfile
+│   ├── main.py
+│   ├── new_extracted_updated.csv
+│   ├── JSON
+│   │   ├── parsed_questions.json
+│   │   └── parsed_questions_set_B.json
+│   ├── Questions
+│   │   ├── Equity_Valuation_Concepts_and_Basic_Tools_Set_A_Questions.txt
+│   │   ├── Equity_Valuation_Concepts_and_Basic_Tools_Set_B_Questions.txt
+│   │   ├── Introduction_to_Industry_and_Company_Analysis_Set_A_Questions.txt
+│   │   ├── Introduction_to_Industry_and_Company_Analysis_Set_B_Questions.txt
+│   │   ├── Market_Efficiency_Set_A_Questions.txt
+│   │   └── Market_Efficiency_Set_B_Questions.txt
+│   └── utils
+│       ├── los_pinecone.py
+│       ├── new_extracted_updated.csv
+│       ├── question_generation.py
+│       ├── report_of_questions.py
+│       ├── snowflake_connector.py
+│       ├── store_in_pinecone.py
+│       ├── summary_generation.py
+│       └── __init__.py
+└── frontend
+    ├── app.py
+    ├── Dockerfile
+    ├── data
+    │   ├── csv_files
+    │   │   ├── Equity Valuation_ Concepts and Basic Tools.csv
+    │   │   ├── EquityValuationConceptsandBasicTools.csv
+    │   │   ├── Introduction to Industry and Company Analysis.csv
+    │   │   ├── Market Efficiency.csv
+    │   ├── json_files
+    │   │   ├── Equity Valuation_ Concepts and Basic Tools.json
+    │   │   ├── Introduction to Industry and Company Analysis.json
+    │   │   ├── Market Efficiency.json
+    │   └── readme_files
+    │       ├── readme_Equity Valuation_ Concepts and Basic Tools.md
+    │       ├── readme_Introduction to Industry and Company Analysis.md
+    │       ├── readme_Market Efficiency.md
+    ├── pages
+    │   ├── Step1_Summary_LOS.py
+    │   ├── Step2_Question_Generation_Page.py
+    │   ├── Step3_Question_Answers_Report.py
+    │   └── Step4_LOS_Answers.py
+    └── utils
+        ├── los_answers.py
+        └── pinecone_upload.py
+```
 ## Architectural Diagram
-
+![diagram](https://github.com/BigDataIA-Spring2024-Sec1-Team4/Assignment5/blob/Anirudha/diagrams/system_architecture_for_assignment5.png)
 
 ## To run the application locally, follow these steps:
+
+1. **Clone the Repository**: Clone the repository onto your local machine.
+
+   ```bash
+   git clone https://github.com/BigDataIA-Spring2024-Sec1-Team4/Assignment5
+   ```
+
+2. **Create a Virtual Environment**: Set up a virtual environment to isolate project dependencies.
+
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activate the Virtual Environment**: Activate the virtual environment.
+
+   - **Windows**:
+
+     ```bash
+     venv\Scripts\activate
+     ```
+
+   - **Unix or MacOS**:
+
+     ```bash
+     source venv/bin/activate
+     ```
+
+4. **Run MakeFile to start Docker Compose**: Start the Docker containers using Docker Compose.
+
+   ```bash
+   cd Assignment5
+   make build-up
+   ```
+
+5. **Access Streamlit Interface**: Open your web browser and go to `34.75.0.13:8000` to access the Streamlit interface.
+
+6. **Step1**: On the Streamlit homepage,Users can select a topic from the available topics. generate summaery and save it in pinecone.
+
+7. **Step2 Question_Generation_Page.**:Users can select topics from a dropdown menu and specify the number of questions to generate. Upon clicking the "Generate Questions" button, save data in pinecone
+8. **Step3 Question Answers Report** :Upon clicking the "Run QA Workflow" button, the script loads questions from a JSON file and displayes results
+9. **Step4 LOS Answers** :  Upon clicking the "Generate Report" button, Generates a pie chart for each topic depicting the distribution of correct and incorrect answers.
+    
+By following these steps, you should be able to run the application locally and interact with it using the provided Streamlit interface to upload PDF files, trigger data processing pipelines, and query Snowflake for results.
 
 
 
